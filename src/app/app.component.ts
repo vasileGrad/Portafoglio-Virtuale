@@ -16,11 +16,13 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.getCoinsData();
-  }
+    setInterval(this.getCoinsData.bind(this), 20000);
+    }
 
   getCoinsData(){
-    this.coins = this.coinsService.getCoins();
-    console.log(this.coins);
+    this.coinsService.getCoins().subscribe((response) => {
+      this.coins = response;
+    })
   }
 }
 
