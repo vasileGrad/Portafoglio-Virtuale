@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CoinInfo } from './models/CoinInfo';
 import { CoinsService } from './services/coins.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { CoinsService } from './services/coins.service';
 
 export class AppComponent {
   title = 'Virtual Wallet';
-  coins: any = [];
+  coins: CoinInfo[] = [];
 
   constructor(private coinsService: CoinsService) { 
   }
