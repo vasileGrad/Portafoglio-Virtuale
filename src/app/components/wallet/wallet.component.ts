@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShareDataService } from 'src/app/services/share-data.service';
 
 @Component({
   selector: 'app-wallet',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./wallet.component.css']
 })
 export class WalletComponent implements OnInit {
+  public coinId: string;
 
-  constructor() { }
+  constructor(private sharedData: ShareDataService) { }
 
   ngOnInit(): void {
+    this.sharedData.getCoin().subscribe(coinId => {
+      this.coinId = coinId;
+    });
   }
-
 }
