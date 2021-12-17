@@ -14,6 +14,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { GraphicComponent } from './components/graphic/graphic.component';
 import { WalletComponent } from './components/wallet/wallet.component';
 import { CoinDetailsComponent } from './components/coin-details/coin-details.component';
+
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatIconModule} from '@angular/material/icon';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +36,9 @@ import { CoinDetailsComponent } from './components/coin-details/coin-details.com
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
     HttpClientModule
   ],
   providers: [],
