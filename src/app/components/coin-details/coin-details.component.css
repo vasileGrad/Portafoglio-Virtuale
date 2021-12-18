@@ -22,3 +22,14 @@
 .favorite-icon {
   color: orange;
 }
+
+.info-container {
+  display: flex;
+  margin: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-menu-panel {
+  min-width: 500px ;
+}

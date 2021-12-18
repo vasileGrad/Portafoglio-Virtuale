@@ -14,8 +14,13 @@ export class CoinDetailsComponent implements OnInit {
 
   displayedColumns: string[] = ['info', 'image', 'name', 'current_price', 'symbol', 'last_date', 'favorites'];
   dataSource = new MatTableDataSource<CoinInfo>();
+  public selectedCoin: CoinInfo;
 
   public favoritesSet = new Set<string>();
+
+  public setSelectedCoin(coin: CoinInfo) {
+    this.selectedCoin = coin;
+  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
