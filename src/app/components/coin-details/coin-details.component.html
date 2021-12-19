@@ -54,6 +54,9 @@
         <mat-icon class="favorite-icon" (click)="setFavorite(element)">
           {{ favoritesSet.has(element.id) ? 'star' : 'star_outline' }}
         </mat-icon>
+        <mat-icon (click)="setSelectedCoin(element)">
+          {{ 'bar_chart' }}
+        </mat-icon>
       </td>
     </ng-container>
 
