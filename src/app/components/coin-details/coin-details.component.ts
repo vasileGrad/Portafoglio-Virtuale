@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { CoinInfo } from 'src/app/models/CoinInfo';
 import { CoinsService } from 'src/app/services/coins.service';
 import { ShareDataService } from 'src/app/services/share-data.service';
@@ -14,6 +14,7 @@ export class CoinDetailsComponent implements OnInit {
 
   displayedColumns: string[] = ['info', 'image', 'name', 'current_price', 'symbol', 'last_date', 'favorites'];
   dataSource = new MatTableDataSource<CoinInfo>();
+  public selectedCoin: CoinInfo;
 
   public favoritesSet = new Set<string>();
 
@@ -31,14 +32,18 @@ export class CoinDetailsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  public setFavorite(element: CoinInfo):void {
-    if(this.favoritesSet.has(element.id)) {
+  public setFavorite(element: CoinInfo): void {
+    if (this.favoritesSet.has(element.id)) {
       this.favoritesSet.delete(element.id);
-      console.log('delete');
     } else {
       this.favoritesSet.add(element.id);
-      this.sharedData.coin$.next(element.id);
-      console.log('add');
     }
+
+    this.sharedData.coin$.next([...this.favoritesSet]);
+  }
+
+  public setSelectedCoin(coin: CoinInfo) {
+    this.selectedCoin = coin;
+    this.sharedData.selectedCoin$.next(coin.id);
   }
 }
