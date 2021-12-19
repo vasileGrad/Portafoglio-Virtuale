@@ -18,10 +18,6 @@ export class CoinDetailsComponent implements OnInit {
 
   public favoritesSet = new Set<string>();
 
-  public setSelectedCoin(coin: CoinInfo) {
-    this.selectedCoin = coin;
-  }
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private coinService: CoinsService, private sharedData: ShareDataService) { }
@@ -39,11 +35,14 @@ export class CoinDetailsComponent implements OnInit {
   public setFavorite(element: CoinInfo):void {
     if(this.favoritesSet.has(element.id)) {
       this.favoritesSet.delete(element.id);
-      console.log('delete');
     } else {
       this.favoritesSet.add(element.id);
-      this.sharedData.coin$.next(element.id);
-      console.log('add');
     }
+
+    this.sharedData.coin$.next([...this.favoritesSet]);
+  }
+
+  public setSelectedCoin(coin: CoinInfo) {
+    this.selectedCoin = coin;
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShareDataService } from 'src/app/services/share-data.service';
 
 @Component({
   selector: 'app-graphic',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GraphicComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sharedData: ShareDataService) { }
 
   ngOnInit(): void {
   }
