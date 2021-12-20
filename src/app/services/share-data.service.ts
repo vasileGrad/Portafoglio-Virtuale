@@ -7,8 +7,9 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 export class ShareDataService {
 
   public coin$ = new BehaviorSubject<string[]>(undefined);
-
   public selectedCoin$ = new Subject<string>();
+  private storageBudget = +localStorage.getItem('budget');
+  private budget$ = new BehaviorSubject<number>(this.storageBudget);
 
   constructor() { }
 
@@ -18,5 +19,16 @@ export class ShareDataService {
 
   public getSelectedCoin(): Observable<string> {
     return this.selectedCoin$.asObservable();
+  }
+
+  public addBudget(value: number): void {
+    this.storageBudget = +localStorage.getItem('budget');
+    const currentBudget = this.storageBudget + value;
+    localStorage.setItem('budget', currentBudget.toString());
+    this.budget$.next(currentBudget);
+  }
+
+  public getBudget(): Observable<number> {
+    return this.budget$.asObservable();
   }
 }
