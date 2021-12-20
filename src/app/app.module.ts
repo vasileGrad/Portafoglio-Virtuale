@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CurrentCurrencyComponent } from './components/current-currency/current-currency.component';
 import { TransactionComponent } from './components/transaction/transaction.component';
@@ -50,6 +51,7 @@ import { TransactionComponent } from './components/transaction/transaction.compo
     MatIconModule,
     MatInputModule,
     MatMenuModule,
+    MatSelectModule,
     HttpClientModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
