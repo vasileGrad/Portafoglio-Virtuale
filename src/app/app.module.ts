@@ -19,7 +19,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { CurrentCurrencyComponent } from './components/current-currency/current-currency.component';
+import { TransactionComponent } from './components/transaction/transaction.component';
 
 @NgModule({
   declarations: [
@@ -31,16 +35,20 @@ import { NgxEchartsModule } from 'ngx-echarts';
     FavoriteComponent,
     GraphicComponent,
     WalletComponent,
-    CoinDetailsComponent
+    CoinDetailsComponent,
+    CurrentCurrencyComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
+    MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
+    MatInputModule,
     MatMenuModule,
     HttpClientModule,
     NgxEchartsModule.forRoot({
