@@ -1,0 +1,36 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 30%;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: pink;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.action-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+}
+
+.mat-raised-button {
+  margin: 5px;
+}
+
+.selected-row {
+  background-color: thistle;
+}

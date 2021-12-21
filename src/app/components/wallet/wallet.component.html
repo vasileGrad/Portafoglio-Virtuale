@@ -25,19 +25,25 @@
       </div>
       <div class="card-container-item">
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label *ngIf="!selectedCoin">No coin selected</mat-label>
-          <mat-label *ngIf="selectedCoin">Coin value</mat-label>
+          <mat-label *ngIf="!selectedCoin?.current_price">No coin selected</mat-label>
+          <mat-label *ngIf="selectedCoin?.current_price">Coin value</mat-label>
           <input 
             matInput 
             placeholder="Current price" 
-            [value]="selectedCoin" 
+            [value]="selectedCoin?.current_price || null" 
             disabled 
           />
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Select Coin</mat-label>
-          <mat-select [(ngModel)]="selectedCoin" (selectionChange)="resetValues()">
-            <mat-option *ngFor="let coin of coins$ | async" [value]="coin.current_price">{{ coin.id }}</mat-option>
+          <mat-select 
+            [(ngModel)]="selectedCoin" 
+            (selectionChange)="resetValues()"
+          >
+            <mat-option 
+              *ngFor="let coin of coins$ | async" 
+              [value]="coin"
+              >{{ coin.id }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -52,7 +58,7 @@
             type="number" 
             min="1" 
             placeholder="buc" 
-            [disabled]='!selectedCoin'
+            [disabled]='!selectedCoin?.current_price'
             [value]="amount"
           />
         </mat-form-field>
@@ -70,10 +76,10 @@
   </mat-card-content>
   <mat-card-actions class="card-button-actions">
     <div>
-      <button mat-raised-button color="primary" [disabled]="overPrice">
+      <button mat-raised-button color="primary" [disabled]="overPrice" (click)="buyCoins()">
         Buy
       </button>
-      <button mat-raised-button color="secondary" [disabled]="overPrice">
+      <button mat-raised-button color="secondary" [disabled]="overPrice" (click)="sellCoins()">
         Sell
       </button>
     </div>
