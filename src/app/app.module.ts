@@ -16,6 +16,7 @@ import { GraphicComponent } from './components/graphic/graphic.component';
 import { WalletComponent } from './components/wallet/wallet.component';
 import { CoinDetailsComponent } from './components/coin-details/coin-details.component';
 import { CurrentCurrencyComponent } from './components/current-currency/current-currency.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { TransactionComponent } from './components/transaction/transaction.component';
 
 import { MatCardModule } from '@angular/material/card';
@@ -26,8 +27,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -64,6 +65,7 @@ const routes: Routes = [
     MatInputModule,
     MatMenuModule,
     MatSelectModule,
+    MatSortModule,
     HttpClientModule,
     FormsModule,
     NgxEchartsModule.forRoot({
