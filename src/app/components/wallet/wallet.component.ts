@@ -39,15 +39,20 @@ export class WalletComponent implements OnInit {
   }
 
   buyCoins() {
-    this.performAction("BUY");
+    this.performAction('BUY');
   }
-  
+
   sellCoins() {
     this.performAction('SELL');
   }
 
   performAction(type: string) {
-    this.sharedData.createTransaction(this.selectedCoin, this.amount, this.totalCost, type);
+    this.sharedData.createTransaction(
+      this.selectedCoin,
+      this.amount,
+      this.totalCost,
+      type
+    );
     this.sharedData.calculateBudget(this.totalCost, type);
     this.resetValues();
   }

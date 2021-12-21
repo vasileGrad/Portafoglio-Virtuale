@@ -11,8 +11,18 @@ import { ShareDataService } from 'src/app/services/share-data.service';
   styleUrls: ['./transaction.component.css'],
 })
 export class TransactionComponent {
-  displayedColumns: string[] = ['id', 'date', 'type', 'symbol', 'price', 'amount', 'totalPrice'];
+  displayedColumns: string[] = [
+    'id',
+    'date',
+    'type',
+    'symbol',
+    'price',
+    'amount',
+    'totalPrice'
+  ];
   dataSource: MatTableDataSource<Transaction>;
+  public selectedRow: Transaction = null;
+  public isSelectedRow: boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -33,5 +43,31 @@ export class TransactionComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  selectRow(row: Transaction) {
+    if (this.selectedRow?.id === row.id) {
+      this.isSelectedRow = false;
+      this.selectedRow = null;
+    } else {
+      this.isSelectedRow = true;
+      this.selectedRow = row;
+    }
+  }
+
+  deleteSelectedRow() {
+    if (this.selectRow) {
+      this.dataSource.data = this.dataSource.data.filter(
+        (data) => data.id !== this.selectedRow.id
+      );
+      this.shareDate.deleteTransaction(this.dataSource.data);
+      this.isSelectedRow = false;
+      this.selectedRow = null;
+    }
+  }
+
+  deleteAll() {
+    this.dataSource.data = [];
+    this.shareDate.deleteAllTransactions();
   }
 }

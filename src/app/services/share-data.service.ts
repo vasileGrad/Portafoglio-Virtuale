@@ -34,8 +34,8 @@ export class ShareDataService {
     return this.budget$.asObservable();
   }
 
-  public getTransactions(){
-    if(localStorage.getItem(TRANSACTIONS)) {
+  public getTransactions() {
+    if (localStorage.getItem(TRANSACTIONS)) {
       return JSON.parse(localStorage.getItem(TRANSACTIONS));
     }
     return [];
@@ -56,15 +56,23 @@ export class ShareDataService {
     const currentTransaction = this.getTransactions().pop();
     const id = currentTransaction ? currentTransaction.id : 0;
     const newTransaction: Transaction = {
-      id: id+1, 
+      id: id + 1,
       date: new Date().toLocaleString(),
       type,
       symbol: coinInfo.symbol,
       price: coinInfo.current_price,
       amount,
       totalPrice
-    }
+    };
     this.setTransactions(newTransaction);
+  }
+
+  public deleteTransaction(transactions: Transaction[]) {
+    localStorage.setItem(TRANSACTIONS, JSON.stringify(transactions));
+  }
+
+  public deleteAllTransactions() {
+    localStorage.removeItem(TRANSACTIONS);
   }
 
   public calculateBudget(totalCost: number, type: string) {
@@ -77,7 +85,7 @@ export class ShareDataService {
         currentBudget += totalCost;
     }
     currentBudget = +currentBudget.toFixed(2);
-    localStorage.setItem("budget", currentBudget.toString());
+    localStorage.setItem('budget', currentBudget.toString());
     this.budget$.next(currentBudget);
   }
 }
