@@ -27,11 +27,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'history', component: TransactionComponent }
+  { path: 'history', component: TransactionComponent },
+  { path: '**', component: NotFoundComponent }
 ]
 
 @NgModule({
@@ -46,7 +48,8 @@ const routes: Routes = [
     WalletComponent,
     CoinDetailsComponent,
     CurrentCurrencyComponent,
-    TransactionComponent
+    TransactionComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
