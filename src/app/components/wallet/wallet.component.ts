@@ -14,7 +14,7 @@ export class WalletComponent implements OnInit {
   public status: number;
   public budget: number;
   public coins$: Observable<CoinInfo[]>;
-  public selectedCoin: number = 0;
+  public selectedCoin: CoinInfo;
   public totalCost: number = 0;
   public overPrice: boolean = false;
   public amount: any;
@@ -26,16 +26,30 @@ export class WalletComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedData.getBudget().subscribe((currentBudget) => {
-      this.status = currentBudget;
-      this.budget = currentBudget;
+      this.status = +currentBudget.toFixed(2);
+      this.budget = +currentBudget.toFixed(2);
     });
     this.coins$ = this.coinService.getCoins();
   }
 
   calculateTotalPrice(evt: any): void {
     this.amount = +evt.value;
-    this.totalCost = this.selectedCoin * +this.amount;
+    this.totalCost = this.selectedCoin.current_price * +this.amount;
     this.overPrice = this.totalCost > this.budget;
+  }
+
+  buyCoins() {
+    this.performAction("BUY");
+  }
+  
+  sellCoins() {
+    this.performAction('SELL');
+  }
+
+  performAction(type: string) {
+    this.sharedData.createTransaction(this.selectedCoin, this.amount, this.totalCost, type);
+    this.sharedData.calculateBudget(this.totalCost, type);
+    this.resetValues();
   }
 
   resetValues(): void {
